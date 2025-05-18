@@ -1,68 +1,72 @@
-package com.cg.training.models;
+package com.cg.training.models.test;
 
-import static org.junit.Assert.*;
-
+import com.cg.training.models.Doctor;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 /**
- * Unit test class for the Doctor model.
- * <p>
- * This class tests the functionality of the Doctor class such as
- * object creation, availability setting, and profile display.
- * </p>
+ * This class tests the Doctor model class to ensure it behaves correctly.
+ * It checks doctor creation, availability status, and name validation.
  * 
- * @Author: Soumili Ghosh
+ * Author: Soumili Ghosh
  */
 public class DoctorTest {
 
     private Doctor doctor;
 
     /**
-     * This method is run before each test case.
-     * It sets up a Doctor object to be used in tests.
+     * Sets up a Doctor object before each test.
      */
     @Before
     public void setUp() {
-        doctor = new Doctor("D1001", "DrSushir");
+        doctor = new Doctor("D1001", "JohnDoe");
     }
 
     /**
-     * Test the Doctor constructor and getter methods.
-     * It checks the ID, name, and default availability of the doctor.
+     * Tests if the doctor is initialized with the correct ID, name, and availability.
      */
     @Test
-    public void testDoctor() {
+    public void testDoctorInitialization() {
         assertEquals("D1001", doctor.getId());
-        assertEquals("DrSushir", doctor.getName());
+        assertEquals("JohnDoe", doctor.getName());
         assertTrue(doctor.isAvailable());
     }
 
     /**
-     * Test the isAvailable and setAvailable methods.
-     * It verifies the doctor's availability status can be changed correctly.
+     * Tests if the doctor is set to available.
      */
     @Test
-    public void testisAvailable() {
-        doctor.setAvailable(false);
-        assertFalse(doctor.isAvailable());
-
+    public void testSetAvailableTrue() {
         doctor.setAvailable(true);
         assertTrue(doctor.isAvailable());
     }
 
     /**
-     * Test the showProfile method.
-     * This is a basic test to ensure the method runs without throwing an exception.
+     * Tests if the doctor is set to unavailable.
+     */
+    @Test
+    public void testSetAvailableFalse() {
+        doctor.setAvailable(false);
+        assertFalse(doctor.isAvailable());
+    }
+
+    /**
+     * Calls the method to display the doctor's profile.
+     * (This test ensures the method runs without errors.)
      */
     @Test
     public void testShowProfile() {
-        try {
-            doctor.showProfile();
-        } catch (Exception e) {
-            // Exception is caught and ignored for this simple test.
-        }
+        doctor.setAvailable(true);
+        doctor.showProfile(); // Output is printed to console
     }
 
-} 
-
+    /**
+     * Tests that creating a doctor with an invalid name throws an exception.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidDoctorNameThrowsException() {
+        new Doctor("D1002", "Dr123"); // Invalid name with numbers
+    }
+}
