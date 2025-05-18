@@ -65,7 +65,7 @@ A **Java-based console application** that enables patients to book medical appoi
   - `void showAllAppointments()`
 
 ### 🏁 Class: `Main`
-- Methods:
+- Interactive Menu:
   - `1. Register Patient`
   - `2. Register Doctor`
   - `3. Book Appointment`
