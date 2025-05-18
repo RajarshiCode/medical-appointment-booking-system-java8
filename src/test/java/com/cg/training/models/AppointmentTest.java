@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * This class tests the Appointment model class to ensure its methods work correctly.
  * It checks appointment creation, status updates, and appointment details.
  * 
- * Author: Sreejit Sarkar
+ * @author: Sreejit Sarkar
  */
 public class AppointmentTest {
 
