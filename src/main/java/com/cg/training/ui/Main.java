@@ -12,7 +12,7 @@ import com.cg.training.service.AppointmentSystem;
  * It allows the user to act as either a Doctor or a Patient and perform
  * different operations such as registration, booking appointments, and managing them.
  * 
- * Author: Rishiraj Ray 
+ * Author: Rishiraj Ray and Pritha Saha
  */
 public class Main {
     
