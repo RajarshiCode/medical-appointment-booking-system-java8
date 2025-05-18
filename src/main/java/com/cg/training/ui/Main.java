@@ -12,7 +12,7 @@ import com.cg.training.service.AppointmentSystem;
  * It allows the user to act as either a Doctor or a Patient and perform
  * different operations such as registration, booking appointments, and managing them.
  * 
- * Author: Rishiraj Ray 
+ * Author: Rishiraj Ray and Pritha Saha
  */
 public class Main {
     
@@ -91,4 +91,80 @@ public class Main {
                         }
                         if (doctorChoice.equals("5")) break;
                     }
+                // Patient menu
+                } else if (roleChoice.equals("2")) {
+                    while (true) {
+                        System.out.println("\nPatient Menu:");
+                        System.out.println("1. Register a Patient");
+                        System.out.println("2. Show All Doctors");
+                        System.out.println("3. Book Appointment");
+                        System.out.println("4. Show Appointments");
+                        System.out.println("5. Exit");
+                        System.out.print("Enter choice: ");
+                        String patientChoice = sc.nextLine();
 
+                        switch (patientChoice) {
+                            case "1":
+                                System.out.print("Enter Patient Name: ");
+                                String pname = sc.nextLine();
+                                system.registerPatient(pname);
+                                break;
+
+                            case "2":
+                                System.out.println("All Doctors");
+                                system.showAllDoctors();
+                                break;
+
+                            case "3":
+                                System.out.print("Enter Numeric Patient ID (digits only, without 'P'): ");
+                                String pid = sc.nextLine();
+                                if (!pid.matches("\\d+")) {
+                                    System.out.println("Invalid ID: Must contain only numbers.");
+                                    break;
+                                }
+                                Patient p = system.findPatientById("P" + pid);
+                                if (p != null) {
+                                    try {
+                                        system.bookAppointment(p);
+                                        system.saveAppointmentsToFile();
+                                    } catch (InvalidAppointmentException e) {
+                                        System.out.println("Error: " + e.getMessage());
+                                    }
+                                } else {
+                                    System.out.println("Patient not found.");
+                                }
+                                break;
+
+                            case "4":
+                                System.out.print("Enter your Patient ID (e.g., P1001): ");
+                                String patId = sc.nextLine();
+                                system.showAppointmentsByPatientId(patId);
+                                break;
+
+                            case "5":
+                                System.out.println("Going back to main menu!!");
+                                break;
+
+                            default:
+                                System.out.println("Invalid choice. Please enter a number from 1 to 5.");
+                        }
+
+                        if (patientChoice.equals("5")) break;
+                    }
+
+                // Exit the application
+                } else if (roleChoice.equals("3")) {
+                    System.out.println("Exiting......, Thank You!");
+                    system.clearAllContentsOfTheFile();
+                    sc.close();
+                    System.exit(0);
+
+                } else {
+                    System.out.println("Invalid role choice. Please enter 1, 2, or 3.");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred.");
+        }
+    }
+}
