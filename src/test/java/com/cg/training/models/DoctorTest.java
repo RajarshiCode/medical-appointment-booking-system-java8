@@ -12,7 +12,7 @@ import org.junit.Test;
  * object creation, availability setting, and profile display.
  * </p>
  * 
- * @author: Soumili Ghosh
+ * @Author: Soumili Ghosh
  */
 public class DoctorTest {
 
